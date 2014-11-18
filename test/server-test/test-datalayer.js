@@ -16,7 +16,6 @@ describe("Testing of the interface", function () {
 
     });
 
-
     //  describe("test findWiki - case insensitive", function () {
     //      var camelCase = "SeaRch";
     //      var upperCase = "SEARCH";
