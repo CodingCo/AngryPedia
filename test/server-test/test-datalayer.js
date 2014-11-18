@@ -5,8 +5,12 @@ describe("Testing of the interface", function () {
 
 
     describe("test getWiki", function () {
+        var searchString = "guns";
         it("should return a complete Wiki article", function () {
 
+            wikiMapper.getWiki(searchString, function () {
+                // test something
+            });
 
         });
 
