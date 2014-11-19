@@ -57,8 +57,9 @@ describe("Testing of the interface", function () {
                 if (err) return done(err);
                 var isPresent = false;
                 for (var i = 0; i < data.length; ++i) {
-                    if (data[i].title === one.title)
+                    if (data[i].title === one.title) {
                         isPresent = true;
+                    }
                 }
                 isPresent.should.equal(true);
                 done();
@@ -93,23 +94,28 @@ describe("Testing of the interface", function () {
         }
     );
 
-    //
-    //
-    //  describe("test getCategories", function () {
-    //
-    //      it("Should return a list of distinct categories", function () {
-    //
-    //      });
-    //  });
-    //
-    //
-    //  describe("test getWikisWithCategory", function () {
-    //      it("should return list of wiki objects with given category")
-    //  })
+
+    describe("test getCategories", function () {
+        var categories = ["Acids", "Algae", "Agronomy"];
+        it("Should return a list of distinct categories: Acids, Algae...", function (done) {
+            wikiMapper.getCategories(function (err, data) {
+                if (err) return done(err);
+                data.should.containDeep(categories);
+                done();
+            })
+        });
+    });
+
+
+    describe("test getWikisWithCategory", function () {
+        it("should return list of wiki objects with given category", function (done) {
+            wikiMapper.getWikiByCategories(category, function (err, data) {
+                if(err) return done(err);
+                console.log(data);
+                data.should.be.type('array');
+                done();
+            })
+        })
+    })
 
 });
-
-/*
- * supplementary methods for tests cases
- *
- * */

@@ -16,7 +16,9 @@ exports.getWiki = function (title, callback) {
 
 
 exports.findWiki = function (titleAbstract, callback) {
-    model.find({title: {$regex: new RegExp(titleAbstract, "i")}}, {title: 1, abstract: 1}, callback);
+    model.find({title: {$regex: new RegExp(titleAbstract, "i")}}, {title: 1, abstract: 1, _id: 0}, callback);
 };
 
-
+exports.getCategories = function (callback) {
+    model.find().distinct('categories', callback);
+};
