@@ -5,7 +5,11 @@ var router = express.Router();
 
 router.get('/getWiki/:title', function (request, response) {
     var title = request.params.title;
-
+    facade.getWiki(title, function (err, data) {
+        if (err) response.send(err);
+        response.setHeader('Content-Type', 'application/json');
+        response.send(data);
+    });
 });
 
 router.get('/findWiki/:searchString', function (request, response) {

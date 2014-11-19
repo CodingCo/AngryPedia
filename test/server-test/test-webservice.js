@@ -4,10 +4,48 @@ var app = require('../../server/app');
 var db = require('../../server/source/db');
 
 
+/*
+ * webservice tests made with supertest
+ */
+
 describe("Webservice test", function () {
-    
+
     after(function (done) {
         db.close(done);
+    });
+
+    describe("getWiki test", function () {
+        this.timeout(5000);
+
+        it("should match search title", function (done) {
+            var testReq = {
+                title: "Abu Dhabi"
+            };
+            request(app)
+                .get('/getWiki/' + testReq.title)
+                .expect(200)
+                .end(function (err, res) {
+                    var article = res.body;
+                    if (err) return done(err);
+                    article.should.have.property('title', testReq.title);
+                    done();
+                });
+        });
+
+        it("should return empty object", function (done) {
+            var invalidWiki = "hdsjkdhjkfs";
+            request(app)
+                .get('/getWiki/' + invalidWiki)
+                .expect(200)
+                .expect('Content-type', /json/)
+                .end(function (err, res) {
+                    var article = res.body;
+                    if (err)return done(err);
+                    (JSON.stringify(article)).should.equal('{}');
+                    done();
+                });
+        });
+
     });
 
     describe("test findWiki webservice", function () {

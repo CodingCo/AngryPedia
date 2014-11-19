@@ -24,6 +24,6 @@
   },
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha test/server-test/test-datalayer.js"
+    "test": "mocha test/server-test/test-webservice.js"
   }
 }
