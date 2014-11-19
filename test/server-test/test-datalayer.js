@@ -46,24 +46,18 @@ describe("Testing of the interface", function () {
     });
 
     describe("test findWiki - case insensitive", function () {
-            var camelCase = "SeaRch";
-            var upperCase = "SEARCH";
-            var lowerCase = "search";
-
+            var camelCase = "AbAcus";
+            var upperCase = "ABACUS";
+            var lowerCase = "abacus";
             var one = {
-                title: "",
-                abstract: ""
-            };
-            var two = {
-                title: "",
-                abstract: ""
+                title: "Abacus"
             };
 
             function test(err, data, done) {
                 if (err) return done(err);
                 var isPresent = false;
                 for (var i = 0; i < data.length; ++i) {
-                    if (data[i].title === one.title || two.title)
+                    if (data[i].title === one.title)
                         isPresent = true;
                 }
                 isPresent.should.equal(true);
@@ -71,19 +65,34 @@ describe("Testing of the interface", function () {
             }
 
             it("Should return list of titles, and abstracts - camelCase", function (done) {
-                wikiMapper.findWiki(camelCase, test(err, data, done));
+                wikiMapper.findWiki(camelCase, function (err, data) {
+                    test(err, data, done);
+                });
             });
 
-            it("Should return list of titles, and abstracts - camelCase", function (done) {
-                wikiMapper.findWiki(upperCase, test(err, data, done));
+            it("Should return list of titles, and abstracts - upperCase", function (done) {
+                wikiMapper.findWiki(upperCase, function (err, data) {
+                    test(err, data, done);
+                });
             });
 
-            it("Should return list of titles, and abstracts - camelCase", function (done) {
-                wikiMapper.findWiki(lowerCase, test(err, data, done));
+            it("Should return list of titles, and abstracts - lowerCase", function (done) {
+                wikiMapper.findWiki(lowerCase, function (err, data) {
+                    test(err, data, done);
+                });
             });
+
+            it("Size should be greater than 2", function (done) {
+                wikiMapper.findWiki("fun", function (err, data) {
+                    if (err) return done(err);
+                    data.length.should.be.greaterThan(2);
+                    done();
+                })
+            })
+
         }
-    )
-    ;
+    );
+
     //
     //
     //  describe("test getCategories", function () {
@@ -99,3 +108,8 @@ describe("Testing of the interface", function () {
     //  })
 
 });
+
+/*
+ * supplementary methods for tests cases
+ *
+ * */

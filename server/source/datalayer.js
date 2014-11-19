@@ -15,4 +15,8 @@ exports.getWiki = function (title, callback) {
 };
 
 
+exports.findWiki = function (titleAbstract, callback) {
+    model.find({title: {$regex: new RegExp(titleAbstract, "i")}}, {title: 1, abstract: 1}, callback);
+};
+
 
