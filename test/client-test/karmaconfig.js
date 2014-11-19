@@ -15,9 +15,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-    'client/SPA/*.js',
-    'client/SPA/**/*.js',
-    'test/client-test/*js'
+    'client/vendor/angular/angular.js',
+    'client/vendor/angular-route/angular-route.js',
+    'client/vendor/angular-mocks/angular-mocks.js',
+    'client/SPA/wiki/wiki.js',
+    'test/client-test/wikiTest.js'
     ],
 
 
