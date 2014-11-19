@@ -2,7 +2,9 @@ var should = require('should');
 var wikiMapper = require('../../server/source/datalayer');
 var wikiModel = require('../../server/source/db');
 
+
 describe("Testing of the interface", function () {
+    "use strict";
 
     before(function (done) {
         wikiModel.connect(done);
@@ -109,10 +111,20 @@ describe("Testing of the interface", function () {
 
     describe("test getWikisWithCategory", function () {
         it("should return list of wiki objects with given category", function (done) {
+            var category = "Acids";
             wikiMapper.getWikiByCategories(category, function (err, data) {
-                if(err) return done(err);
-                console.log(data);
-                data.should.be.type('array');
+                if (err) return done(err);
+                data.should.be.an.instanceOf(Array);
+                data[0].categories.should.containEql(category);
+                done();
+            })
+        });
+
+        it("should return an empty list", function (done) {
+            var category = "blah blah i do not exist lolololo 4238497gsgj";
+            wikiMapper.getWikiByCategories(category, function (err, data) {
+                if (err) return done(err);
+                data.should.be.empty;
                 done();
             })
         })
