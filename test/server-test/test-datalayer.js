@@ -1,7 +1,7 @@
 var should = require('should');
 var wikiMapper = require('../../server/source/datalayer');
 var wikiModel = require('../../server/source/db');
-
+var ObjectId = require('mongodb').ObjectID;
 
 describe("Testing of the interface", function () {
     "use strict";
@@ -14,27 +14,29 @@ describe("Testing of the interface", function () {
         wikiModel.close(done);
     });
 
-
+    /*
+     * Tests the getWiki function.
+     * IMPORTANT: When testing against a local mongodb the article._id test will fail
+     * the _id types differ from those on mongolab, which are ObjectId's.
+     */
     describe("test getWiki", function () {
-        var validSearchString = "Abacus";
         var invalidSearchString = "testblah";
-        var article = {
-            _id: "546c8c38299712cd0451ffd3",
-            title: "Abacus",
-            url: "http://en.wikipedia.org/wiki/Abacus"
+        var testArticle = {
+            _id: ObjectId("546a5dd5e1cf19d015664e25"),
+            url: "http://en.wikipedia.org/wiki/An_American_in_Paris",
+            title: "An American in Paris"
         };
 
         it("should return a complete Wiki article", function (done) {
-            wikiMapper.getWiki(validSearchString, function (err, data) {
+            wikiMapper.getWiki(testArticle.title, function (err, article) {
                 if (err) return done(err);
-                (function () {
-                    var valid = true;
-                    valid = valid && (article._id === data._id.toString());
-                    valid = valid && (article.title === data.title);
-                    valid = valid && (article.url === data.url);
-                    return valid;
-                })().should.equal(true);
-                done();
+                console.log(typeof article._id);
+                // Here we check if data is equal to expected -> article
+                article.should.have.property('_id', testArticle._id);
+                article.should.have.property('url', testArticle.url);
+                article.should.have.property('title', testArticle.title);
+                return done();
+
             });
         });
 
@@ -48,53 +50,52 @@ describe("Testing of the interface", function () {
     });
 
     describe("test findWiki - case insensitive", function () {
-            var camelCase = "AbAcus";
-            var upperCase = "ABACUS";
-            var lowerCase = "abacus";
-            var one = {
-                title: "Abacus"
-            };
+        var camelCase = "AbAcus";
+        var upperCase = "ABACUS";
+        var lowerCase = "abacus";
+        var one = {
+            title: "Abacus"
+        };
 
-            function test(err, data, done) {
-                if (err) return done(err);
-                var isPresent = false;
-                for (var i = 0; i < data.length; ++i) {
-                    if (data[i].title === one.title) {
-                        isPresent = true;
-                    }
+        function test(err, data, done) {
+            if (err) return done(err);
+            var isPresent = false;
+            for (var i = 0; i < data.length; ++i) {
+                if (data[i].title === one.title) {
+                    isPresent = true;
                 }
-                isPresent.should.equal(true);
-                done();
             }
-
-            it("Should return list of titles, and abstracts - camelCase", function (done) {
-                wikiMapper.findWiki(camelCase, function (err, data) {
-                    test(err, data, done);
-                });
-            });
-
-            it("Should return list of titles, and abstracts - upperCase", function (done) {
-                wikiMapper.findWiki(upperCase, function (err, data) {
-                    test(err, data, done);
-                });
-            });
-
-            it("Should return list of titles, and abstracts - lowerCase", function (done) {
-                wikiMapper.findWiki(lowerCase, function (err, data) {
-                    test(err, data, done);
-                });
-            });
-
-            it("Size should be greater than 2", function (done) {
-                wikiMapper.findWiki("fun", function (err, data) {
-                    if (err) return done(err);
-                    data.length.should.be.greaterThan(2);
-                    done();
-                })
-            })
-
+            isPresent.should.equal(true);
+            done();
         }
-    );
+
+        it("Should return list of titles, and abstracts - camelCase", function (done) {
+            wikiMapper.findWiki(camelCase, function (err, data) {
+                test(err, data, done);
+            });
+        });
+
+        it("Should return list of titles, and abstracts - upperCase", function (done) {
+            wikiMapper.findWiki(upperCase, function (err, data) {
+                test(err, data, done);
+            });
+        });
+
+        it("Should return list of titles, and abstracts - lowerCase", function (done) {
+            wikiMapper.findWiki(lowerCase, function (err, data) {
+                test(err, data, done);
+            });
+        });
+
+        it("Size should be greater than 2", function (done) {
+            wikiMapper.findWiki("fun", function (err, data) {
+                if (err) return done(err);
+                data.length.should.be.greaterThan(2);
+                done();
+            })
+        });
+
+    });
 
 
     describe("test getCategories", function () {
@@ -128,6 +129,8 @@ describe("Testing of the interface", function () {
                 done();
             })
         })
-    })
+    });
 
 });
+
+

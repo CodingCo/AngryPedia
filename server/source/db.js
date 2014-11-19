@@ -29,7 +29,7 @@ exports.WikiModel = mongoose.model('wiki', wikiSchema);
 
 
 (function () {
-    mongoose.connection.on('connected', function () {
+    mongoose.connection.on('connected', function () { //
         console.log("Connection opened");
     });
 
