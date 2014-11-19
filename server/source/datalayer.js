@@ -1,14 +1,14 @@
-var model = require('db').WikiModel;
+var model = require('./db').WikiModel;
 
 exports.getWiki = function (title, callback) {
 
-    model.find({}, function (err, article) {
+    model.findOne({'title': title}, function (err, article) {
 
         if (err) {
-            return callback(err);
+            return callback(); // Undefined or err?
         }
 
-        callback(article);
+        callback(null, article);
 
     });
 
