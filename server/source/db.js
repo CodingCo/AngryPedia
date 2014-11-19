@@ -4,7 +4,9 @@ var dbUri = require('../../config.json').dbUri;
 
 exports.connect = function (onConnected) {
     mongoose.connect(dbUri, function (error) {
-        onConnected(error);
+        if (onConnected) {
+            onConnected(error);
+        }
     });
 };
 
