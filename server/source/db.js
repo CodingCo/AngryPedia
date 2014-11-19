@@ -14,6 +14,20 @@ exports.close = function (onClose) {
 };
 
 
+var wikiSchema = mongoose.Schema({
+        title: {type: String, index: true},
+        url: {type: String},
+        abstract: {type: String},
+        categories: {type: [{type: String}], index: true},
+        links: {type: [{type: String}], index: true},
+        headings: [{heading: {type: String}, position: {type: Number}}]
+    },
+    {collection: 'wiki'}
+);
+
+exports.WikiModel = mongoose.model('wiki', wikiSchema);
+
+
 (function () {
     mongoose.connection.on('connected', function () {
         console.log("Connection opened");

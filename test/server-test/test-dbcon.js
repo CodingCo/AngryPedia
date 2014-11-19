@@ -1,5 +1,5 @@
 var should = require('should');
-var dbConnection = require('../../server/source/connection');
+var dbConnection = require('../../server/source/db');
 var mongoose = require('mongoose');
 var dbUri = require('../../config.json').dbUri;
 

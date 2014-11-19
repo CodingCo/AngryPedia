@@ -1,12 +1,10 @@
 var wikiMapperInterface = require('../../server/source/datalayer');
 
-function MockStuff(){
+"use strict";
 
-}
 
-MockStuff.prototype = new wikiMapperInterface;
 
-var b = new MockStuff();
+
 
 
 b.getWiki();

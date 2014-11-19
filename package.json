@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "The G5 CA4",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -25,6 +22,7 @@
     "supertest": "^0.15.0"
   },
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "mocha test/server-test/test-datalayer.js"
   }
 }

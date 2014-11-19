@@ -6,10 +6,15 @@ describe("Testing of the interface", function () {
 
     describe("test getWiki", function () {
         var searchString = "guns";
-        it("should return a complete Wiki article", function () {
 
+        var article = {
+            _id: 1,
+            title: "test"
+        };
+
+        it("should return a complete Wiki article", function () {
             wikiMapper.getWiki(searchString, function () {
-                // test something
+
             });
 
         });
@@ -17,6 +22,8 @@ describe("Testing of the interface", function () {
         it("Should return undefined, no such article", function () {
 
         })
+
+
 
     });
 
