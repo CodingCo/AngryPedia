@@ -28,7 +28,7 @@ describe("rest api for wiki", function () {
 
         it("should return empty object", function (done) {
             request(app)
-                .get('/getWiki/frjudjufjeujfuebfenefhehujdueufueuhfuefhue')
+                .get('/getWiki/frjudjufjeujfuebfenefhehujdueufueuhfefuefhue')
                 .expect(200)
                 .expect('Content-type', /json/)
                 .end(function (err, res) {
