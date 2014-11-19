@@ -7,11 +7,12 @@ describe("Testing of the interface", function () {
     "use strict";
 
     before(function (done) {
-        wikiModel.connect(done);
+        //wikiModel.connect(done);
     });
 
     after(function (done) {
         wikiModel.close(done);
+        console.log("is closed");
     });
 
     /*

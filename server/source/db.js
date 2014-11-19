@@ -12,7 +12,9 @@ exports.connect = function (onConnected) {
 
 
 exports.close = function (onClose) {
-    mongoose.connection.close(onClose)
+    mongoose.connection.close(function () {
+        onClose();
+    })
 };
 
 

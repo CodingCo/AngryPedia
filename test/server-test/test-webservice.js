@@ -1,9 +1,14 @@
 var request = require('supertest');
 var should = require('should');
 var app = require('../../server/app');
+var db = require('../../server/source/db');
 
 
 describe("Webservice test", function () {
+    
+    after(function (done) {
+        db.close(done);
+    });
 
     describe("test findWiki webservice", function () {
         var searchTitle = "Abacus";

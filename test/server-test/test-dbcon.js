@@ -38,7 +38,10 @@ describe("Database Connection", function () {
         before(function (done) {
             mongoose.connect(dbUri, done);
         });
-    })
+    });
 
+    after(function () {
+        mongoose.disconnect();
+    })
 });
 
