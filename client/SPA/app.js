@@ -1,7 +1,3 @@
-/**
- * Created by Robert on 18/11/14.
- */
-
 'use strict';
 
 // Declare app level module which depends on views, and components
