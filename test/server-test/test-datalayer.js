@@ -1,49 +1,89 @@
 var should = require('should');
 var wikiMapper = require('../../server/source/datalayer');
+var wikiModel = require('../../server/source/db');
 
 describe("Testing of the interface", function () {
 
-
-    describe("test getWiki", function () {
-        var searchString = "guns";
-
-        var article = {
-            _id: 1,
-            title: "test"
-        };
-
-        it("should return a complete Wiki article", function () {
-            wikiMapper.getWiki(searchString, function () {
-
-            });
-
-        });
-
-        it("Should return undefined, no such article", function () {
-
-        })
-
-
-
+    before(function (done) {
+        wikiModel.connect(done);
     });
 
-    //  describe("test findWiki - case insensitive", function () {
-    //      var camelCase = "SeaRch";
-    //      var upperCase = "SEARCH";
-    //      var lowerCase = "search";
-    //
-    //      it("Should return list of titles, and abstracts - camelCase", function () {
-    //
-    //      });
-    //
-    //      it("Should return list of titles, and abstracts - camelCase", function () {
-    //
-    //      });
-    //
-    //      it("Should return list of titles, and abstracts - camelCase", function () {
-    //
-    //      });
-    //  });
+    after(function (done) {
+        wikiModel.close(done);
+    });
+
+
+    describe("test getWiki", function () {
+        var validSearchString = "Abacus";
+        var invalidSearchString = "testblah";
+        var article = {
+            _id: "546c8c38299712cd0451ffd3",
+            title: "Abacus",
+            url: "http://en.wikipedia.org/wiki/Abacus"
+        };
+
+        it("should return a complete Wiki article", function (done) {
+            wikiMapper.getWiki(validSearchString, function (err, data) {
+                if (err) return done(err);
+                (function () {
+                    var valid = true;
+                    valid = valid && (article._id === data._id.toString());
+                    valid = valid && (article.title === data.title);
+                    valid = valid && (article.url === data.url);
+                    return valid;
+                })().should.equal(true);
+                done();
+            });
+        });
+
+        it("Should return undefined, no such article", function (done) {
+            wikiMapper.getWiki(invalidSearchString, function (err, data) {
+                if (err) return done(err);
+                (data === undefined).should.equal(true);
+                done();
+            })
+        })
+    });
+
+    describe("test findWiki - case insensitive", function () {
+            var camelCase = "SeaRch";
+            var upperCase = "SEARCH";
+            var lowerCase = "search";
+
+            var one = {
+                title: "",
+                abstract: ""
+            };
+            var two = {
+                title: "",
+                abstract: ""
+            };
+
+            function test(err, data, done) {
+                if (err) return done(err);
+                var isPresent = false;
+                for (var i = 0; i < data.length; ++i) {
+                    if (data[i].title === one.title || two.title)
+                        isPresent = true;
+                }
+                isPresent.should.equal(true);
+                done();
+            }
+
+            it("Should return list of titles, and abstracts - camelCase", function (done) {
+                wikiMapper.findWiki(camelCase, test(err, data, done));
+            });
+
+            it("Should return list of titles, and abstracts - camelCase", function (done) {
+                wikiMapper.findWiki(upperCase, test(err, data, done));
+            });
+
+            it("Should return list of titles, and abstracts - camelCase", function (done) {
+                wikiMapper.findWiki(lowerCase, test(err, data, done));
+            });
+        }
+    )
+    ;
     //
     //
     //  describe("test getCategories", function () {

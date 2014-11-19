@@ -6,8 +6,3 @@ var wikiMapperInterface = require('../../server/source/datalayer');
 
 
 
-
-b.getWiki();
-b.getWiki = function () {
-    console.log("fuycicj");
-};
