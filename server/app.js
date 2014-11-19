@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var db = require('./source/db');
 var app = express();
+var rest = require('./routes/rest');
 
 db.connect();
 
@@ -22,10 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../public/app')));
 
-
-app.use('/', function (request, response) {
-    response.send("Hello world");
-});
+app.use('/', rest);
 
 // error handlers
 app.use(function (req, res, next) {
