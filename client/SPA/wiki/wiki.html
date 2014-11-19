@@ -1,0 +1,23 @@
+<ul>
+    <li><h3>Title: {{wiki.title}}</h3></li><!--make link to real wiki-->
+    <li><h3>Abstract: </h3></li>
+    <li>{{wiki.abstract}}</li>
+    <li><h3>Categories: </h3></li>
+    <li>
+        <ol ng-repeat="category in wiki.categories">
+            <li>{{category}}</li><!--make link to categories-->
+        </ol>
+    </li>
+    <li><h3>Links: </h3></li>
+    <li>
+        <ol ng-repeat="link in wiki.links">
+            <li>{{link}}</li>
+        </ol>
+    </li>
+    <li><h3>Table of Content:</h3></li>
+    <li>
+        <ol ng-repeat="heading in wiki.headings | orderBy wiki.headings.position">
+            <li>{{heading}}</li>
+        </ol>
+    </li>
+</ul>
