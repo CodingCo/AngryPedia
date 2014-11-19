@@ -5,15 +5,26 @@ describe("Testing of the interface", function () {
 
 
     describe("test getWiki", function () {
-        var searchString = "guns";
+        var searchString = "An American in Paris";
 
         var article = {
             _id: 1,
-            title: "test"
+            url: "http://en.wikipedia.org/wiki/An_American_in_Paris",
+            title: "An American in Paris"
         };
 
-        it("should return a complete Wiki article", function () {
-            wikiMapper.getWiki(searchString, function () {
+        it("should return a complete Wiki article", function (done) {
+            wikiMapper.getWiki(searchString, function (err, data) {
+
+                if(err){
+                    return done(err);
+                }
+
+                // Here we check if data is equal to expected -> article
+                data.should.have.property('_id', article.id);
+                data.should.have.property('url', article.url);
+                data.should.have.property('title', article.title);
+                return done();
 
             });
 
@@ -23,9 +34,8 @@ describe("Testing of the interface", function () {
 
         })
 
-
-
     });
+
 
     //  describe("test findWiki - case insensitive", function () {
     //      var camelCase = "SeaRch";
