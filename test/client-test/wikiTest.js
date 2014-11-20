@@ -1,23 +1,22 @@
-
-describe('WikiApp.wiki', function () {
+describe('WikiApp', function () {
 
 
     var wikiMock = [
         {
-            "title" : "TestTitle",
-            "url" : "TestURL",
-            "abstract" : "TestAbstract",
-            "categories" : [ "TestCategory" ],
-            "headings" : [
-                { "heading" : "Adjacent counties", "position" : "1" }],
-            "links" : [ "TestLink" ]
+            "title": "TestTitle",
+            "url": "TestURL",
+            "abstract": "TestAbstract",
+            "categories": ["TestCategory"],
+            "headings": [
+                {"heading": "Adjacent counties", "position": "1"}],
+            "links": ["TestLink"]
         }
     ];
 
     var routeParam = "TestParam";
 
     beforeEach(function () {
-        module('WikiApp.wiki')
+        module('WikiApp')
     });
 
     beforeEach(inject(function ($httpBackend, $rootScope, $controller) {
@@ -27,7 +26,8 @@ describe('WikiApp.wiki', function () {
         this.scope = $rootScope.$new();
         this.ctrl = $controller('wikiCtrl', {
             $scope: this.scope,
-            $routeParams: {wikiTitle: routeParam}});
+            $routeParams: {wikiTitle: routeParam}
+        });
     }));
 
     it("should be defined", function () {

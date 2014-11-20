@@ -4,13 +4,17 @@ var dbUri = require('../../config.json').dbUri;
 
 exports.connect = function (onConnected) {
     mongoose.connect(dbUri, function (error) {
-        onConnected(error);
+        if (onConnected) {
+            onConnected(error);
+        }
     });
 };
 
 
 exports.close = function (onClose) {
-    mongoose.connection.close(onClose)
+    mongoose.connection.close(function () {
+        onClose();
+    })
 };
 
 
@@ -29,7 +33,7 @@ exports.WikiModel = mongoose.model('wiki', wikiSchema);
 
 
 (function () {
-    mongoose.connection.on('connected', function () {
+    mongoose.connection.on('connected', function () { //
         console.log("Connection opened");
     });
 
