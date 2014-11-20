@@ -14,7 +14,7 @@ app.controller('wikiCtrl', ['$scope', '$http', '$routeParams', function ($scope,
 
 
 app.controller('wikiListCtrl', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
-    $scope.searchString = "Abacus";
+    $scope.searchString = "";
     $scope.load = function(){
         $http.get('rest/findWiki/'+$scope.searchString).success(function (data) {
             $scope.wikis = data;
