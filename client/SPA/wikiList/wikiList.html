@@ -6,10 +6,16 @@
 <button type="button" class="btn btn-primary" ng-click="load()">Search</button>
 
 <br/>
+<br/>
+<br/>
 
 <ul class="listPage" ng-repeat="wiki in wikis">
 
-    <li><a href="#wiki/{{wiki.title}}" ng-mouseover="test=true;" ng-mouseleave="test=false;">{{wiki.title}}</a>
+    <li>
+
+        <a href="#wiki/{{wiki.title}}"
+           ng-mouseover="test=true;"
+           ng-mouseleave="test=false;"> {{wiki.title}}  </a>
 
         <p ng-show="test">{{wiki.abstract}}</p>
 
