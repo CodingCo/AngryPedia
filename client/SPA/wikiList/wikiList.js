@@ -3,7 +3,7 @@
 angular.module('WikiApp.wikiList', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/wiki/:searchString', {
+        $routeProvider.when('wikilist/:searchString', {
             templateUrl: 'wikiList/wikiList.html',
             controller: 'wikiListCtrl'
         });

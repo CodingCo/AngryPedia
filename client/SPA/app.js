@@ -14,9 +14,14 @@ app.controller('wikiCtrl', ['$scope', '$http', '$routeParams', function ($scope,
 
 
 app.controller('wikiListCtrl', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
-    $http.get('findWiki/$routeParams.searchString').success(function (data) {
-        $scope.wikis = data;
-    });
+    $scope.searchString = "Abacus";
+    $scope.load = function(){
+        console.log($scope.searchString);
+        $http.get('rest/findWiki/'+$scope.searchString).success(function (data) {
+            $scope.wikis = data;
+            console.log('Success');
+        });
+    }
 }]);
 
 
@@ -27,6 +32,9 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: 'wikiCtrl'
         })
         .when('/wiki/:searchString', {
+            templateUrl: 'wikiList/wikiList.html',
+            controller: 'wikiListCtrl'
+        }).when('/wikiList',{
             templateUrl: 'wikiList/wikiList.html',
             controller: 'wikiListCtrl'
         })

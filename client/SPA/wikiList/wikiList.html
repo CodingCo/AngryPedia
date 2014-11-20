@@ -1,3 +1,10 @@
+
+<h1>WIKILIST</h1>
+
+<input type="text" ng-model="searchString" ng-model-options="{debounce: 1000}">
+
+<button type="button" class="btn btn-primary" ng-click="load()">Search</button>
+
 <ul ng-repeat="wiki in wikis">
 
     <li><a href="{{wiki.url}}">{{wiki.title}}</a></li>

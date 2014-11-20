@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var db = require('./source/db');
 var rest = require('./routes/rest');
+var home = require('./routes/home');
 var app = express();
 
 db.connect();
@@ -20,10 +21,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../public')));
-app.use(express.static(path.join(__dirname, '../public/app')));
+app.use(express.static(path.join(__dirname, '../client')));
+app.use(express.static(path.join(__dirname, '../client/SPA')));
 
-app.use('/', rest);
+app.use('/', home);
+app.use('/rest', rest);
 
 // error handlers
 app.use(function (req, res, next) {
