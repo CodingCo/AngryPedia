@@ -5,11 +5,23 @@ var app = angular.module('WikiApp', ['ngRoute']);
 
 
 app.controller('wikiCtrl', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
-    $http.get('getWiki/' + $routeParams.wikiTitle).success(function (data) {
-        $scope.wiki = data;
-    }).error(function (data, status, headers, config) {
-        $scope.error = data;
-    });
+
+    $scope.searchText = "";
+
+    $scope.findWiki= function(){
+
+        $scope.searchText = "funciton called!";
+
+        $http.get('findWiki/' + $scope.searchText).success(function (data) {
+            $scope.searchText = "SUCCES";
+            $scope.wiki = data;
+        }).error(function (status) {
+            $scope.searchText = "Fail";
+            console.log(status);
+        });
+
+    };
+
 }]);
 
 
@@ -34,3 +46,10 @@ app.config(['$routeProvider', function ($routeProvider) {
 }]);
 
 
+/*
+*
+ $http.get('getWiki/' + $routeParams.wikiTitle).success(function (data) {
+ $scope.wiki = data;
+ }).error(function (data, status, headers, config) {
+ $scope.error = data;
+ });*/

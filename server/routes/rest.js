@@ -3,6 +3,8 @@ var facade = require('../source/datalayer');
 var router = express.Router();
 
 
+
+
 router.get('/getWiki/:title', function (request, response) {
     var title = request.params.title;
     facade.getWiki(title, function (err, data) {
@@ -34,6 +36,12 @@ router.get('/getWikiByCategory/:category', function (request, response) {
         if (err) response.send("not found");
         response.send(data);
     });
+});
+
+router.all('/', function(req, res){
+
+    res.redirect('index.html');
+
 });
 
 
