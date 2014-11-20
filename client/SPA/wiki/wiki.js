@@ -11,9 +11,7 @@ angular.module('WikiApp.wiki', ['ngRoute'])
 
     .controller('wikiCtrl',['$scope','$http','$routeParams', function($scope,$http,$routeParams) {
 
-        $scope.title = "Hello";
-
-        $http.get('getWiki/$routeParams.wikiTitle').success (function(data){
+        $http.get('getWiki/'+$routeParams.wikiTitle).success (function(data){
             $scope.wiki = data;
         }).
             error(function (data, status, headers, config) {
