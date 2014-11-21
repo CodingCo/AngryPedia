@@ -3,7 +3,7 @@
 <ul ng-repeat="category in categories | orderBy:'toString'">
 
     <li>
-        <a href="">{{categories[$index+1]}}</a>
+        <a href="#category/{{categories[$index+1]}}">{{categories[$index+1]}}</a>
     </li>
 
 </ul>
