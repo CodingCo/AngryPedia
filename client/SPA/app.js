@@ -29,6 +29,29 @@ app.controller('wikiListCtrl', ['$scope', 'webServiceFactory', function ($scope,
     };
 }]);
 
+/*
+ * controller to the wiki search page containing title and expandable abstracts
+ */
+app.controller('categoriesCtrl', ['$scope', 'webServiceFactory', function ($scope, webServiceFactory) {
+    $scope.categories = [];
+    $scope.loadCategories = function () {
+        webServiceFactory.getCategories().success(function (data) {
+            $scope.categories = data;
+        });
+    };
+
+    $scope.loadTitles = function (category) {
+        webServiceFactory.getWikiFromCategory(category).success(function (data) {
+            $scope.categoryTitles = data;
+        });
+    };
+
+    $scope.$on('$viewContentLoaded', function() {
+        $scope.loadCategories();
+    });
+
+}]);
+
 
 /* The web services have been moved to an angular factory
  * so all controllers can use the api
@@ -41,6 +64,14 @@ app.factory("webServiceFactory", ['$http', function ($http) {
 
         getWiki: function (title) {
             return $http.get('api/getWiki/' + title);
+        },
+
+        getCategories: function () {
+            return $http.get('api/getCategories/');
+        },
+
+        getWikiFromCategory: function (category) {
+            return $http.get('api/getWikiByCategory/'+category);
         }
     };
 }]);
@@ -58,6 +89,9 @@ app.config(['$routeProvider', function ($routeProvider) {
         .when('/wikiList', {
             templateUrl: 'wikiList/wikiList.html',
             controller: 'wikiListCtrl'
+        }).when('/getCategories', {
+            templateUrl: 'categories/categories.html',
+            controller: 'categoriesCtrl'
         })
         .otherwise({redirectTo: '/wikiList'});
 }]);

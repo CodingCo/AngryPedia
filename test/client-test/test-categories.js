@@ -6,8 +6,8 @@ describe("Test Wiki application categories controller", function () {
      */
     var ctrl, $scope;
     var categoriesMock = [
-            "testCategory1",
-            "testCategory2"
+        "testCategory1",
+        "testCategory2"
     ];
 
     /*
