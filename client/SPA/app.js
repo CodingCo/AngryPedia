@@ -42,7 +42,7 @@ app.controller('categoriesCtrl', ['$scope', 'webServiceFactory', function ($scop
 
     $scope.loadTitles = function (category) {
         webServiceFactory.getWikiFromCategory(category).success(function (data) {
-            $scope.categoryTitles = data;
+            return data;
         });
     };
 

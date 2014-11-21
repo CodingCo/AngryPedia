@@ -1,14 +1,13 @@
 <h3>Categories</h3>
 
-<ul ng-repeat="category in categories">
+<ul ng-repeat="category in categories | orderBy:'toString'">
 
     <li>
         {{categories[$index+1]}}
     </li>
 
-        <!--<ul ng-repeat="categoryTitle in categoryTitles" ng-init="a=loadTitles(categories[$index+1])">
+        <ul ng-repeat="categoryTitle in titles" ng-init="titles = loadTitles(categories[$index+1])">
             {{categoryTitle}}
-        </ul>-->
-
+        </ul>
 
 </ul>

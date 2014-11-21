@@ -21,7 +21,8 @@ module.exports = function (config) {
             'client/SPA/app.js',
             'test/client-test/test-getwiki.js',
             'test/client-test/test-listview.js',
-            'test/client-test/test-categories.js'
+            'test/client-test/test-categories.js',
+            'test/client-test/test-category.js'
         ],
 
 

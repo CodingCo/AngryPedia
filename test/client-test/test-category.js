@@ -1,14 +1,18 @@
-describe("Test Wiki application categories controller", function () {
+describe("Test Wiki application category controller", function () {
 
     /* Test data:
      * A mock object imitating the category object list
      *
      */
     var ctrl, $scope;
-    var categoriesMock = [
-        "testCategory1",
-        "testCategory2"
+    var categoryMock = [
+        { title: "testTitle",
+          abstract: "testAbstract",
+          categories: ["categoryTest"]
+        }
     ];
+
+    var categoryParam = "Param"
 
     /*
      * added module and controller with injected dependencies
@@ -21,10 +25,10 @@ describe("Test Wiki application categories controller", function () {
         $scope = $rootScope.$new();
         $scope.httpBackend = $httpBackend;
         $scope.httpBackend
-            .when('GET', 'api/getCategories/')
-            .respond(categoriesMock);
+            .when('GET', 'api/getWikiByCategory/' + categoryParam)
+            .respond(categoryMock);
 
-        ctrl = $controller('categoriesCtrl', {
+        ctrl = $controller('categoryCtrl', {
             $scope: $scope
         });
     }));
@@ -39,12 +43,12 @@ describe("Test Wiki application categories controller", function () {
     });
 
     it("should be an empty list", function () {
-        expect($scope.categories).toEqual([]);
+        expect($scope.category).toEqual([]);
     });
 
     it("Should return the mock object with the list", function () {
-        $scope.loadCategories();
+        $scope.loadWikis(categoryParam);
         $scope.httpBackend.flush();
-        expect($scope.categories).toEqual(categoriesMock);
+        expect($scope.category).toEqual(categoryMock);
     });
 });
