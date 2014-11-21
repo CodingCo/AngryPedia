@@ -51,8 +51,9 @@ app.controller('categoriesCtrl', ['$scope', 'webServiceFactory', function ($scop
  */
 app.controller('categoryCtrl', ['$scope', 'webServiceFactory','$routeParams', function ($scope, webServiceFactory, $routeParams) {
     $scope.category = [];
+    $scope.categoryT = $routeParams.categoryTitle;
     $scope.loadWikis = function () {
-        webServiceFactory.getCategory($routeParams.categoryTitle).success(function (data) {
+        webServiceFactory.getCategory($scope.categoryT).success(function (data) {
             $scope.category = data;
         });
     };
@@ -104,8 +105,8 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'categories/categories.html',
             controller: 'categoriesCtrl'
         }).when('/category/:categoryTitle', {
-            templateUrl: 'categories/categories.html',
-            controller: 'categoriesCtrl'
+            templateUrl: 'category/category.html',
+            controller: 'categoryCtrl'
         })
         .otherwise({redirectTo: '/wikiList'});
 }]);
