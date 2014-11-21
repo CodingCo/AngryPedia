@@ -1,6 +1,9 @@
 describe('WikiApp', function () {
 
-
+    /* Test data:
+     * A mock object imitating the wiki object
+     */
+    var routeParam = "TestParam";
     var wikiMock = [
         {
             "title": "TestTitle",
@@ -13,7 +16,10 @@ describe('WikiApp', function () {
         }
     ];
 
-    var routeParam = "TestParam";
+    /*
+     * added module and controller with injected dependencies
+     * before the test starts
+     */
 
     beforeEach(function () {
         module('WikiApp')
@@ -30,6 +36,11 @@ describe('WikiApp', function () {
         });
     }));
 
+
+    /*
+     * tests are pretty self explanatory
+     */
+    
     it("should be defined", function () {
         expect(this.ctrl).toBeDefined();
     });
