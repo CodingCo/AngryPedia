@@ -3,11 +3,7 @@
 <ul ng-repeat="category in categories | orderBy:'toString'">
 
     <li>
-        {{categories[$index+1]}}
+        <a href="">{{categories[$index+1]}}</a>
     </li>
-
-        <ul ng-repeat="categoryTitle in titles" ng-init="titles = loadTitles(categories[$index+1])">
-            {{categoryTitle}}
-        </ul>
 
 </ul>
