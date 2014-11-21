@@ -12,7 +12,7 @@ describe("Test Wiki application category controller", function () {
         }
     ];
 
-    var categoryParam = "Param"
+    var categoryParam = "Param";
 
     /*
      * added module and controller with injected dependencies
@@ -25,7 +25,7 @@ describe("Test Wiki application category controller", function () {
         $scope = $rootScope.$new();
         $scope.httpBackend = $httpBackend;
         $scope.httpBackend
-            .when('GET', 'api/getWikiByCategory/' + categoryParam)
+            .when('GET', 'api/getWikiByCategory/'+categoryParam)
             .respond(categoryMock);
 
         ctrl = $controller('categoryCtrl', {

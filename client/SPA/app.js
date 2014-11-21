@@ -30,7 +30,7 @@ app.controller('wikiListCtrl', ['$scope', 'webServiceFactory', function ($scope,
 }]);
 
 /*
- * controller to the wiki search page containing title and expandable abstracts
+ * controller to the categories page containing title and expandable abstracts
  */
 app.controller('categoriesCtrl', ['$scope', 'webServiceFactory', function ($scope, webServiceFactory) {
     $scope.categories = [];
@@ -40,14 +40,25 @@ app.controller('categoriesCtrl', ['$scope', 'webServiceFactory', function ($scop
         });
     };
 
-    $scope.loadTitles = function (category) {
-        webServiceFactory.getWikiFromCategory(category).success(function (data) {
-            return data;
+    $scope.$on('$viewContentLoaded', function() {
+        $scope.loadCategories();
+    });
+
+}]);
+
+/*
+ * controller to the category page containing title and expandable abstracts
+ */
+app.controller('categoryCtrl', ['$scope', 'webServiceFactory', function ($scope, webServiceFactory) {
+    $scope.category = [];
+    $scope.loadWikis = function (category) {
+        webServiceFactory.getCategory(category).success(function (data) {
+            $scope.category = data;
         });
     };
 
     $scope.$on('$viewContentLoaded', function() {
-        $scope.loadCategories();
+        $scope.loadWikis();
     });
 
 }]);
@@ -70,7 +81,7 @@ app.factory("webServiceFactory", ['$http', function ($http) {
             return $http.get('api/getCategories/');
         },
 
-        getWikiFromCategory: function (category) {
+        getCategory: function (category) {
             return $http.get('api/getWikiByCategory/'+category);
         }
     };
