@@ -22,7 +22,7 @@ describe("Webservice test", function () {
                 title: "Abu Dhabi"
             };
             request(app)
-                .get('/getWiki/' + testReq.title)
+                .get('/api/getWiki/' + testReq.title)
                 .expect(200)
                 .end(function (err, res) {
                     var article = res.body;
@@ -30,12 +30,13 @@ describe("Webservice test", function () {
                     article.should.have.property('title', testReq.title);
                     done();
                 });
+
         });
 
         it("should return empty object", function (done) {
             var invalidWiki = "hdsjkdhjkfs";
             request(app)
-                .get('/getWiki/' + invalidWiki)
+                .get('/api/getWiki/' + invalidWiki)
                 .expect(200)
                 .expect('Content-type', /json/)
                 .end(function (err, res) {
@@ -54,7 +55,7 @@ describe("Webservice test", function () {
 
         it("should return a wiki Json page based on search", function (done) {
             request(app)
-                .get('/findWiki/' + searchTitle)
+                .get('/api/findWiki/' + searchTitle)
                 .expect(200)
                 .expect('Content-Type', /json/)
                 .end(function (err, response) {
@@ -67,7 +68,7 @@ describe("Webservice test", function () {
 
         it("should return an empty array with no articles", function (done) {
             request(app)
-                .get('/findWiki/' + invalidSearch)
+                .get('/api/findWiki/' + invalidSearch)
                 .expect(200)
                 .expect('Content-Type', /json/)
                 .end(function (err, response) {
@@ -85,7 +86,7 @@ describe("Webservice test", function () {
         it("should return a list containing:" + categories, function (done) {
             this.timeout(5000);
             request(app)
-                .get('/getCategories')
+                .get('/api/getCategories')
                 .expect(200)
                 .expect('Content-Type', /json/)
                 .end(function (err, response) {
@@ -102,7 +103,7 @@ describe("Webservice test", function () {
         it("should return a list with a wiki with the same category", function (done) {
             var category = "Acids";
             request(app)
-                .get('/getWikiByCategory/' + category)
+                .get('/api/getWikiByCategory/' + category)
                 .expect(200)
                 .expect('Content-Type', /json/)
                 .end(function (err, response) {

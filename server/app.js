@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use(express.static(path.join(__dirname, '../client/SPA')));
 
 app.use('/', home);
-app.use('/rest', rest);
+app.use('/api', rest);
 
 // error handlers
 app.use(function (req, res, next) {

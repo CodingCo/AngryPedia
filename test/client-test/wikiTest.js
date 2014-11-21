@@ -21,7 +21,7 @@ describe('WikiApp', function () {
 
     beforeEach(inject(function ($httpBackend, $rootScope, $controller) {
         this.httpBackendMock = $httpBackend;
-        this.httpBackendMock.expectGET('rest/getWiki/' + routeParam).
+        this.httpBackendMock.expectGET('api/getWiki/' + routeParam).
             respond(wikiMock);
         this.scope = $rootScope.$new();
         this.ctrl = $controller('wikiCtrl', {
