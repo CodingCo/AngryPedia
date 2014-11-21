@@ -13,20 +13,32 @@ app.controller('wikiCtrl', ['$scope', '$http', '$routeParams', function ($scope,
 }]);
 
 
-app.controller('wikiListCtrl', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+app.controller('wikiListCtrl', ['$scope', '$http', 'webServiceFactory', function ($scope, $http, webServiceFactory) {
     $scope.searchString = "";
+    $scope.wikis = [];
     $scope.load = function () {
-        $http.get('api/findWiki/' + $scope.searchString).success(function (data) {
+        webServiceFactory.findWiki($scope.searchString).success(function (data) {
             $scope.wikis = data;
         });
     };
+
     $scope.loadWiki = function (title) {
-        $http.get('api/getWiki/' + title).success(function (data) {
-            $scope.wiki = data;
-        });
+
     }
 }]);
 
+
+app.factory("webServiceFactory", ['$http', function () {
+    return {
+        findWiki: function (title) {
+            return $http.get('api/findWiki/' + title);
+        },
+
+        getWiki: function (title) {
+            return $http.get('api/getWiki/' + title);
+        }
+    };
+}]);
 
 
 app.config(['$routeProvider', function ($routeProvider) {
