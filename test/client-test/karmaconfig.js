@@ -19,7 +19,8 @@ module.exports = function (config) {
             'client/vendor/angular-route/angular-route.js',
             'client/vendor/angular-mocks/angular-mocks.js',
             'client/SPA/app.js',
-            'test/client-test/wikiTest.js'
+            //'test/client-test/wikiTest.js',
+            'test/client-test/wiki-list-test.js'
         ],
 
 

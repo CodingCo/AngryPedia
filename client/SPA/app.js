@@ -13,11 +13,13 @@ app.controller('wikiCtrl', ['$scope', '$http', '$routeParams', function ($scope,
 }]);
 
 
-app.controller('wikiListCtrl', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
+app.controller('wikiListCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.searchString = "";
-    $scope.load = function () {
+    $scope.wikis = "Not called";
+    $scope.load = function (callback) {
         $http.get('api/findWiki/' + $scope.searchString).success(function (data) {
-            $scope.wikis = data;
+            $scope.wikis = "called";
+            callback();
         });
     };
     $scope.loadWiki = function (title) {
