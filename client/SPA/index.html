@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-top navbar-inverse" role="navigation">
+<nav class="navbar navbar-top navbar-fixed-top navbar-inverse" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -28,13 +28,12 @@
         </div>
     </div>
 </nav>
-
-
+<br/><br/><br/>
 <div class="container">
-
-    <div ng-view></div>
+    <div class="container">
+        <div ng-view></div>
+    </div>
 </div>
-
 <script src="vendor/angular/angular.js"></script>
 <script src="vendor/angular-route/angular-route.js"></script>
 <script src="app.js"></script>

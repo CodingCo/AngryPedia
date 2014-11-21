@@ -3,8 +3,9 @@
 <ul ng-repeat="wiki in category">
 
     <li>
-        <a href="#wiki/{{wiki.title}}">
+        <a href="#wiki/{{wiki.title}}" name="{{category.charAt(0)}}">
             {{wiki.title}}
+
         </a>
     </li>
 
