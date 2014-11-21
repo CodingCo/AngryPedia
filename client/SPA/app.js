@@ -21,6 +21,12 @@ app.controller('wikiListCtrl', ['$scope', '$http', 'webServiceFactory', function
             $scope.wikis = data;
         });
     };
+
+    $scope.loadWiki = function (title) {
+        webServiceFactory.getWiki(title).success(function (data) {
+            $scope.wiki = data;
+        });
+    }
 }]);
 
 
