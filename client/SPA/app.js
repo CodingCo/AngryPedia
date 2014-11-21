@@ -94,7 +94,7 @@ app.factory("webServiceFactory", ['$http', function ($http) {
  */
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-        .when('/api/:wikiTitle', {
+        .when('/wiki/:wikiTitle', {
             templateUrl: 'wiki/wiki.html',
             controller: 'wikiCtrl'
         })

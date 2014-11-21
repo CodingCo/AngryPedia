@@ -1,5 +1,5 @@
 <ul>
-    <li><h2>Title: <a href="{{wiki.url}}">{{wiki.title}}</a></h2></li><!--make link to real wiki-->
+    <li><h2>Title: <a href="{{wiki.url}}">{{wiki.title}}</a></h2></li>
 
     <li><h2>Abstract: </h2></li>
     <p>{{wiki.abstract}}</p>
@@ -7,7 +7,7 @@
     <li><h2>Categories: </h2></li>
 
         <ol ng-repeat="category in wiki.categories">
-            <li>{{category}}</li><!--make link to categories-->
+            <li><a href="#category/{{category}}">{{category}}</a></li>
         </ol>
 
     <li><h2>Links: </h2></li>
