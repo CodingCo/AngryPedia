@@ -1,19 +1,20 @@
 <h1>WIKILIST</h1>
-
-<input type="text" ng-model="searchString" ng-model-options="{debounce: 1000}">
-
-<button type="button" class="btn btn-primary" ng-click="load()">Search</button>
+<form name="searchForm">
+    <input type="text" ng-model="searchString" ng-model-options="{debounce: 1000}" required>
+    <button type="button" class="btn btn-primary" ng-disabled="searchForm.$invalid" ng-click="load(); ">Search</button>
+</form>
 
 <br/>
 <br/>
 <br/>
 
-<ul class="listPage" ng-repeat="wiki in wikis">
+<ul class="listPage" ng-repeat="wiki in wikis" >
     <li>
         <a href="#api/{{wiki.title}}"
-           ng-mouseover="test=true;"
-           ng-mouseleave="test=false;"> {{wiki.title}} </a>
-
-        <p ng-show="test">{{wiki.abstract}}</p>
+           ng-mouseover="enter = true; showListElement()"
+           ng-mouseleave="enter = false; hideListElement()"> {{wiki.title}} </a>
+        <p ng-show="show && enter">{{wiki.abstract}}</p>
     </li>
+
 </ul>
+

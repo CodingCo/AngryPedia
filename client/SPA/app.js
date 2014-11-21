@@ -27,6 +27,24 @@ app.controller('wikiListCtrl', ['$scope', 'webServiceFactory', function ($scope,
             $scope.wikis = data;
         });
     };
+
+    $scope.showListElement = function () {
+        setTimeout(function () {
+            $scope.$apply(function () {
+                $scope.show = true;
+            });
+        }, 1000);
+    };
+
+    $scope.hideListElement = function () {
+        setTimeout(function () {
+            $scope.$apply(function () {
+                $scope.show = false;
+            });
+        }, 10);
+    };
+
+
 }]);
 
 
@@ -61,3 +79,18 @@ app.config(['$routeProvider', function ($routeProvider) {
         })
         .otherwise({redirectTo: '/wikiList'});
 }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
