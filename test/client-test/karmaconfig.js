@@ -20,7 +20,8 @@ module.exports = function (config) {
             'client/vendor/angular-mocks/angular-mocks.js',
             'client/SPA/app.js',
             'test/client-test/test-getwiki.js',
-            'test/client-test/test-listview.js'
+            'test/client-test/test-listview.js',
+            'test/client-test/test-categories.js'
         ],
 
 
