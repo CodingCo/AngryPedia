@@ -8,8 +8,8 @@
 <br/>
 <br/>
 
-<ul class="listPage" ng-repeat="wiki in wikis">
-    <li>
+<ul class="listPage" >
+    <li ng-repeat="wiki in wikis">
         <a href="#wiki/{{wiki.title}}"
            ng-mouseover="test=true;"
            ng-mouseleave="test=false;"> {{wiki.title}} </a>

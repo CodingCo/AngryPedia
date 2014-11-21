@@ -6,20 +6,20 @@
 
     <li><h2>Categories: </h2></li>
 
-        <ol ng-repeat="category in wiki.categories">
-            <li><a href="#category/{{category}}">{{category}}</a></li>
+        <ol n>
+            <li ng-repeat="category in wiki.categories"><a href="#category/{{category}}">{{category}}</a></li>
         </ol>
 
     <li><h2>Links: </h2></li>
 
-        <ul ng-repeat="link in wiki.links" class="list-group">
-            <li><a href="{{link}}">{{link}}</a></li>
+        <ul class="list-group">
+            <li ng-repeat="link in wiki.links"><a href="{{link}}">{{link}}</a></li>
         </ul>
 
     <li><h2>Table of Content:</h2></li>
 
-        <ol class="list" ng-repeat="heading in wiki.headings | orderBy : 'position'">
-            <li><strong>{{heading.position}}.</strong> {{heading.heading}}</li>
+        <ol class="list" >
+            <li ng-repeat="heading in wiki.headings | orderBy : 'position'"><strong>{{heading.position}}.</strong> {{heading.heading}}</li>
         </ol>
 
 </ul>

@@ -1,9 +1,7 @@
 <h3>Categories</h3>
 
-<ul ng-repeat="category in categories | orderBy:'toString'">
-
-    <li>
+<ul>
+    <li ng-repeat="category in categories">
         <a href="#category/{{categories[$index+1]}}">{{categories[$index+1]}}</a>
     </li>
-
 </ul>

@@ -34,6 +34,7 @@ app.controller('wikiListCtrl', ['$scope', 'webServiceFactory', function ($scope,
  */
 app.controller('categoriesCtrl', ['$scope', 'webServiceFactory', function ($scope, webServiceFactory) {
     $scope.categories = [];
+
     $scope.loadCategories = function () {
         webServiceFactory.getCategories().success(function (data) {
             $scope.categories = data;
