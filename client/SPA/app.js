@@ -3,7 +3,6 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('WikiApp', ['ngRoute']);
 
-
 /*
  * controller to the wiki page showing one wiki with all information
  */
@@ -27,6 +26,22 @@ app.controller('wikiListCtrl', ['$scope', 'webServiceFactory', function ($scope,
             $scope.wikis = data;
         });
     };
+
+    $scope.showListElement = function () {
+        setTimeout(function () {
+            $scope.$apply(function () {
+                $scope.show = true;
+            });
+        }, 1000);
+    };
+
+    $scope.hideListElement = function () {
+        setTimeout(function () {
+            $scope.$apply(function () {
+                $scope.show = false;
+            });
+        }, 10);
+    };
 }]);
 
 /*
@@ -41,8 +56,10 @@ app.controller('categoriesCtrl', ['$scope', 'webServiceFactory', function ($scop
         });
     };
 
-    $scope.$on('$viewContentLoaded', function() {
-        $scope.loadCategories();
+    $scope.$on('$viewContentLoaded', function () {
+        if ($scope.categories.length == 0) {
+            $scope.loadCategories();
+        }
     });
 
 }]);
@@ -50,7 +67,7 @@ app.controller('categoriesCtrl', ['$scope', 'webServiceFactory', function ($scop
 /*
  * controller to the category page containing title and expandable abstracts
  */
-app.controller('categoryCtrl', ['$scope', 'webServiceFactory','$routeParams', function ($scope, webServiceFactory, $routeParams) {
+app.controller('categoryCtrl', ['$scope', 'webServiceFactory', '$routeParams', function ($scope, webServiceFactory, $routeParams) {
     $scope.category = [];
     $scope.categoryT = $routeParams.categoryTitle;
     $scope.loadWikis = function () {
@@ -59,8 +76,10 @@ app.controller('categoryCtrl', ['$scope', 'webServiceFactory','$routeParams', fu
         });
     };
 
-    $scope.$on('$viewContentLoaded', function() {
-        $scope.loadWikis();
+    $scope.$on('$viewContentLoaded', function () {
+        if ($scope.category.length == 0) {
+            $scope.loadWikis();
+        }
     });
 
 }]);
@@ -84,7 +103,7 @@ app.factory("webServiceFactory", ['$http', function ($http) {
         },
 
         getCategory: function (category) {
-            return $http.get('api/getWikiByCategory/'+category);
+            return $http.get('api/getWikiByCategory/' + category);
         }
     };
 }]);
@@ -111,3 +130,18 @@ app.config(['$routeProvider', function ($routeProvider) {
         })
         .otherwise({redirectTo: '/wikiList'});
 }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
