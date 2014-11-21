@@ -21,14 +21,10 @@ app.controller('wikiListCtrl', ['$scope', '$http', 'webServiceFactory', function
             $scope.wikis = data;
         });
     };
-
-    $scope.loadWiki = function (title) {
-
-    }
 }]);
 
 
-app.factory("webServiceFactory", ['$http', function () {
+app.factory("webServiceFactory", ['$http', function ($http) {
     return {
         findWiki: function (title) {
             return $http.get('api/findWiki/' + title);

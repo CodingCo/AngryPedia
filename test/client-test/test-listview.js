@@ -18,22 +18,25 @@ describe("Test Wiki application list controller", function () {
 
     beforeEach(inject(function ($controller, $rootScope, $httpBackend) {
         $scope = $rootScope.$new();
-        $scope.searchString = searchString;
-        $httpBackend
-            .when('GET', '/api/findWiki/' + searchString)
+        $scope.httpBackend = $httpBackend;
+        $scope.httpBackend
+            .when('GET', 'api/findWiki/' + searchString)
             .respond(wikiMock);
 
         ctrl = $controller('wikiListCtrl', {
-            $scope: $scope,
-            $routeParams: {searchString: searchString}
+            $scope: $scope
         });
     }));
 
-
-    it("Should return the mock object with the list", function () {
-        //$scope.load();
-        expect($).toEqual(wikiMock);
-
+    it("should be an empty list", function () {
+        $scope.searchString = searchString;
+        expect($scope.wikis).toEqual([]);
     });
 
+    it("Should return the mock object with the list", function () {
+        $scope.searchString = searchString;
+        $scope.load();
+        $scope.httpBackend.flush();
+        expect($scope.wikis).toEqual(wikiMock);
+    });
 });

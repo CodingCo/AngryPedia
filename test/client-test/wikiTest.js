@@ -37,7 +37,6 @@ describe('WikiApp', function () {
     it('Should fetch 1 wiki ', function () {
         expect(this.scope.wiki).toBeUndefined();
         this.httpBackendMock.flush();
-        console.log(this.scope.wiki);
         expect(this.scope.wiki.length).toEqual(1);
     });
 
