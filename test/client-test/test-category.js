@@ -29,7 +29,8 @@ describe("Test Wiki application category controller", function () {
             .respond(categoryMock);
 
         ctrl = $controller('categoryCtrl', {
-            $scope: $scope
+            $scope: $scope,
+            $routeParams: {categoryTitle: categoryParam}
         });
     }));
 
@@ -47,7 +48,7 @@ describe("Test Wiki application category controller", function () {
     });
 
     it("Should return the mock object with the list", function () {
-        $scope.loadWikis(categoryParam);
+        $scope.loadWikis();
         $scope.httpBackend.flush();
         expect($scope.category).toEqual(categoryMock);
     });

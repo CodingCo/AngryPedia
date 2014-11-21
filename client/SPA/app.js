@@ -49,10 +49,10 @@ app.controller('categoriesCtrl', ['$scope', 'webServiceFactory', function ($scop
 /*
  * controller to the category page containing title and expandable abstracts
  */
-app.controller('categoryCtrl', ['$scope', 'webServiceFactory', function ($scope, webServiceFactory) {
+app.controller('categoryCtrl', ['$scope', 'webServiceFactory','$routeParams', function ($scope, webServiceFactory, $routeParams) {
     $scope.category = [];
-    $scope.loadWikis = function (category) {
-        webServiceFactory.getCategory(category).success(function (data) {
+    $scope.loadWikis = function () {
+        webServiceFactory.getCategory($routeParams.categoryTitle).success(function (data) {
             $scope.category = data;
         });
     };
@@ -101,6 +101,9 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'wikiList/wikiList.html',
             controller: 'wikiListCtrl'
         }).when('/getCategories', {
+            templateUrl: 'categories/categories.html',
+            controller: 'categoriesCtrl'
+        }).when('/category/:categoryTitle', {
             templateUrl: 'categories/categories.html',
             controller: 'categoriesCtrl'
         })
