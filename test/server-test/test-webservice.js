@@ -10,9 +10,14 @@ var db = require('../../server/source/db');
 
 describe("Webservice test", function () {
 
+    before(function (done) {
+        db.connect(done);
+    });
+
     after(function (done) {
         db.close(done);
     });
+
 
     describe("getWiki test", function () {
         this.timeout(5000);

@@ -4,22 +4,24 @@ var wikiModel = require('../../server/source/db');
 var ObjectId = require('mongodb').ObjectID;
 
 describe("Testing of the interface", function () {
-    "use strict";
-
-    before(function (done) {
-        wikiModel.connect(done);
-    });
-
-    after(function (done) {
-        wikiModel.close(done);
-        console.log("is closed");
-    });
 
     /*
      * Tests the getWiki function.
      * IMPORTANT: When testing against a local mongodb the article._id test will fail
      * the _id types differ from those on mongolab, which are ObjectId's.
      */
+
+    before(function (done) {
+        wikiModel.close(function () {
+            wikiModel.connect(done);
+        });
+    });
+
+    after(function (done) {
+        wikiModel.close(done);
+    });
+
+
     describe("test getWiki", function () {
         var invalidSearchString = "testblah";
         var testArticle = {
@@ -31,7 +33,6 @@ describe("Testing of the interface", function () {
         it("should return a complete Wiki article", function (done) {
             wikiMapper.getWiki(testArticle.title, function (err, article) {
                 if (err) return done(err);
-                console.log(typeof article._id);
                 // Here we check if data is equal to expected -> article
                 article.should.have.property('_id', testArticle._id);
                 article.should.have.property('url', testArticle.url);
@@ -100,6 +101,7 @@ describe("Testing of the interface", function () {
 
 
     describe("test getCategories", function () {
+        this.timeout(5000);
         var categories = ["Acids", "Algae", "Agronomy"];
         it("Should return a list of distinct categories: Acids, Algae...", function (done) {
             wikiMapper.getCategories(function (err, data) {
@@ -131,6 +133,7 @@ describe("Testing of the interface", function () {
             })
         })
     });
+
 
 });
 

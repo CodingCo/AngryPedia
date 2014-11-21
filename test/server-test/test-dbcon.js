@@ -18,6 +18,9 @@ describe("Database Connection", function () {
                 done();
             });
         });
+        before(function (done) {
+            done();
+        });
 
         after(function (done) {
             if (mongoose.connection.db) {
@@ -38,10 +41,9 @@ describe("Database Connection", function () {
         before(function (done) {
             mongoose.connect(dbUri, done);
         });
+        after(function (done) {
+            mongoose.connection.close(done);
+        });
     });
-
-    after(function () {
-        mongoose.disconnect();
-    })
 });
 
